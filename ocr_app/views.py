@@ -11,7 +11,7 @@ import os # 🌟 os is imported for file deletion
 # ⚠️ IMPORTANT: Set the path to the Tesseract executable for Windows
 # The path must point to the tesseract.exe file.
 try:
-    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+    pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
 except Exception as e:
     # This block is for warning only; the actual error is caught later in process_image
     print(f"WARNING: Could not set Tesseract command path. Tesseract may not be available. Error: {e}")
