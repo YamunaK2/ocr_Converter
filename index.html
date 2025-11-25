@@ -112,9 +112,11 @@
         const historyError = document.getElementById('history-error');
 
         // --- Configuration ---
-        const HOST = '127.0.0.1:8000'; 
-        const API_ENDPOINT = `http://${HOST}/process_image/`;
-        const RECORDS_ENDPOINT = `http://${HOST}/records/`;
+        // --- Configuration ---
+// ✅ FIX: Use the IP address accessible by your phone
+const HOST = '10.136.90.160:8000'; 
+const API_ENDPOINT = `http://${HOST}/process_image/`;
+const RECORDS_ENDPOINT = `http://${HOST}/records/`;
 
         // Function to reset all status indicators for OCR submission
         function resetSubmissionStatus() {
@@ -213,6 +215,9 @@
                 }
 
             } catch (error) {
+            // In the catch block:
+errorStatus.style.display = 'block';
+saveStatus.style.display = 'none';
                 console.error('Fetch error:', error);
                 
                 let errorMsg = error.message.includes('Failed to fetch') 

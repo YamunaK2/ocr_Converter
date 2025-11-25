@@ -6,17 +6,12 @@ from .models import OcrRecord
 # Tesseract Imports and Image Processing
 from PIL import Image
 import pytesseract
-import os # 🌟 os is imported for file deletion
+import os # os is imported for file deletion
 
-# ⚠️ IMPORTANT: Set the path to the Tesseract executable for Windows
-# The path must point to the tesseract.exe file.
-try:
-    pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
-except Exception as e:
-    # This block is for warning only; the actual error is caught later in process_image
-    print(f"WARNING: Could not set Tesseract command path. Tesseract may not be available. Error: {e}")
+# ❌ REMOVED: The Windows-specific Tesseract path setting (pytesseract.pytesseract.tesseract_cmd = r'C:\...')
+# This is required for deployment on a Linux server like PythonAnywhere.
 
-
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 # =====================================================================
 # Helper Function for Image Preprocessing
 # =====================================================================
@@ -120,7 +115,7 @@ def process_image(request):
             
         return JsonResponse({
             "success": False, 
-            "message": "Tesseract executable not found. Check the path setting in views.py or installation.",
+            "message": "Tesseract executable not found. Ensure Tesseract is installed and on the system PATH.",
             "expected_path": pytesseract.pytesseract.tesseract_cmd 
         }, status=500)
         
@@ -166,7 +161,7 @@ def clear_records(request):
     Clears all stored historical OCR records from the database AND deletes the associated media files.
     """
     try:
-        # 🌟 LOGIC CHANGE: Delete files from disk first
+        # LOGIC CHANGE: Delete files from disk first
         records_to_delete = OcrRecord.objects.all()
         file_count = 0
         

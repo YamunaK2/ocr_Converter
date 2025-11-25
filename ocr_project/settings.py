@@ -8,18 +8,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-example-secret-key-12345'
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.136.90.160']  # Allow local requests from browser
+ALLOWED_HOSTS = ['*']  # Allow local requests from browser
 
 INSTALLED_APPS = [
     # Django Built-in Apps
-    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
 
     # CORS App (REQUIRED)
     'corsheaders',
@@ -65,20 +63,13 @@ WSGI_APPLICATION = 'ocr_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        
-        # ⚠️ Workaround: Use generic 'default' here
-        'NAME': 'default',            
-        
-        'USER': 'YamunaK',                   
-        'PASSWORD': 'your_pa_password',      # <-- REPLACE with your PA password!
-        'HOST': 'YamunaK.mysql.pythonanywhere-services.com',
+        'NAME': 'ocrdb',
+        'USER': 'root',
+        'PASSWORD': 'Y9025975941@',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
-        
         'OPTIONS': {
-            'init_command': "SET default_storage_engine=InnoDB",
-            'read_default_file': '/etc/mysql/my.cnf', 
-            # 🌟 CRITICAL: Use the full, correct database name here:
-            'db': 'YamunaK$yamunak2_ocrdb', 
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         }
     }
 }
