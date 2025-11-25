@@ -3,6 +3,10 @@
 import os
 import sys
 
+# 🌟 NEW CODE STARTS HERE 🌟
+# Force the project root into the Python path
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# 🌟 NEW CODE ENDS HERE 🌟
 
 def main():
     """Run administrative tasks."""
